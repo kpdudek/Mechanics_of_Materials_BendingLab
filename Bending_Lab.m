@@ -1,4 +1,5 @@
 function Bending_Lab
+cd C:\Users\kpdud\Mechanics_of_Materials_BendingLab
 close all
 clear
 clc
