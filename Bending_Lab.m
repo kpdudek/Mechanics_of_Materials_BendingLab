@@ -1,5 +1,4 @@
 function Bending_Lab
-cd C:\Users\kpdud\Mechanics_of_Materials_BendingLab
 close all
 clear
 clc
@@ -87,14 +86,18 @@ average_euler_values(euler_cant,euler_tpb_6,euler_tpb_7,euler_tpb_9)
 
 % Calculate beam deflection
 beam_deflection(tpb_deflection_200,tpb_deflection_100)
-    
+
+
 
 function plot_ALL_force_vs_deflection(cant,tpb_6,tpb_7,tpb_9)
 force_cant = ((cant(1,:) .* .001).*9.8) .* 0.224808943; % Convert g to N, then N to lbf
 force_tpb6 = ((tpb_6(1,:) .* .001).*9.8) .* 0.224808943; % Convert g to N, then N to lbf
 force_tpb7 = ((tpb_7(1,:) .* .001).*9.8) .* 0.224808943; % Convert g to N, then N to lbf
 force_tpb9 = ((tpb_9(1,:) .* .001).*9.8) .* 0.224808943; % Convert g to N, then N to lbf
-
+disp('Force Applied Cantilever')
+disp(force_cant)
+disp('Force Applied TPB')
+disp(force_tpb6)
 %Plot raw data
 figure('Name','All Data')
 plot(cant(2,:),force_cant,'ok',cant(3,:),force_cant,'ob',cant(4,:),force_cant,'or')
@@ -206,14 +209,20 @@ else
     l_ss = l;
 end
 
-fprintf('The K_Bending values for %s are:\n')
+fprintf('The K_Bending values for %s are:\n',NAME)
 fprintf('Aluminum: %.3e\n',k_bending_al)
 fprintf('Brass: %.3e\n',k_bending_br)
 fprintf('Steel: %.3e\n',k_bending_ss)
 
+
 euler_al = (1/l_al) * (1/k_bending_al)^(1/3);
 euler_br = (1/l_br) * (1/k_bending_br)^(1/3);
 euler_ss = (1/l_ss) * (1/k_bending_ss)^(1/3);
+
+fprintf('The Euler values for %s are:\n',NAME)
+fprintf('Aluminum: %.3e\n',euler_al)
+fprintf('Brass: %.3e\n',euler_br)
+fprintf('Steel: %.3e\n',euler_ss)
 
 euler = [euler_al,euler_br,euler_ss];
 
@@ -255,6 +264,12 @@ delta_max_al = sum(v'*delta_al)/sum(v'*v);
 delta_max_br = sum(v'*delta_br)/sum(v'*v);
 delta_max_ss = sum(v'*delta_ss)/sum(v'*v);
 
+disp('Delta Maxes')
+disp(delta_max_al)
+disp(delta_max_br)
+disp(delta_max_ss)
+
+
 theta_max_al = (3*delta_max_al)/L;
 theta_max_br = (3*delta_max_br)/L;
 theta_max_ss = (3*delta_max_ss)/L;
@@ -264,6 +279,11 @@ g = 5/32; %in.
 fit_error_al = theta_max_al * g;
 fit_error_br = theta_max_br * g;
 fit_error_ss = theta_max_ss * g;
+
+disp('Fit Errors...')
+disp(fit_error_al)
+disp(fit_error_br)
+disp(fit_error_ss)
 
 % Display fit error of the micrometer
 fprintf('\nFit errors...')
