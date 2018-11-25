@@ -77,9 +77,9 @@ k_tpb_9 = plot_force_vs_deflection(tpb_9in,'Simple Support 9"');
 % Compute the Euler-Bernoulli value
 fprintf('\nK_Bending Values...\n')
 euler_cant = bending_stiffness(k_cant,cant_lengths,'Cantilever');
-euler_tpb_6 = bending_stiffness(k_tpb_6,6.0,'Simple Support 6"');
-euler_tpb_7 = bending_stiffness(k_tpb_7,7.5,'Simple Support 7.5"');
-euler_tpb_9 = bending_stiffness(k_tpb_9,9.0,'Simple Support 9"');
+euler_tpb_6 = bending_stiffness(k_tpb_6,12.0,'Simple Support 6"');
+euler_tpb_7 = bending_stiffness(k_tpb_7,15.0,'Simple Support 7.5"');
+euler_tpb_9 = bending_stiffness(k_tpb_9,18.0,'Simple Support 9"');
 
 % Calculate the average values
 average_euler_values(euler_cant,euler_tpb_6,euler_tpb_7,euler_tpb_9)
@@ -170,6 +170,11 @@ fprintf('%s\n',ss_eq)
 
 delta_offset_ss = -b_ss/m_ss;
 fprintf('Steel: Delta offset = %.3f\n',delta_offset_ss)
+
+% Print R^2 values of linear fits
+fprintf('\nR^2 Values...\n')
+fprintf('Aluminum: %.4f\nBrass: %.4f\nSteel: %.4f\n',lin_al.Rsquared.Ordinary,...
+    lin_br.Rsquared.Ordinary,lin_ss.Rsquared.Ordinary)
 
 % Plot the linear fits
 plot(al,al_fit,'k',br,br_fit,'b',ss,ss_fit,'r')
